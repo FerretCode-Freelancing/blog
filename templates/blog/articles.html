@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Manrope&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <title>Articles</title>
+  </head>
+  <body class="bg-lightblue-950" style="font-family: 'Inter'">
+    <div class="flex justify-center items-center h-screen text-white">
+      {{range Articles}} {{.Title}} {{.Content}} {{end}}
+    </div>
+  </body>
+</html>

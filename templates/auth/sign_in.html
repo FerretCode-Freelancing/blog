@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Manrope&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sign In</title>
+  </head>
+  <body class="bg-lightblue-950" style="font-family: 'Inter'">
+    <div class="flex justify-center items-center h-screen text-white">
+      <div class="text-center">
+        <form id="account-form" method="get" action="/auth/login">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            class="w-full px-4 py-2 mb-5 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            style="font-family: 'Inter'"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            style="font-family: 'Inter'"
+          />
+
+          <button
+            class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Manrope&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.tiny.cloud/1/8ltocbrkx7wpg3qpm5xz7fvc49p4246x6zt0viplzmu7p6vt/tinymce/6/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+
+    <title>New Post</title>
+  </head>
+  <body class="bg-lightblue-950" style="font-family: 'Inter'">
+    <script>
+      tinymce.init({
+        selector: "textarea",
+        plugins:
+          "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
+        toolbar:
+          "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        tinycomments_mode: "embedded",
+      });
+    </script>
+
+    <div class="flex justify-center items-center h-screen text-white">
+      <div class="text-center">
+        <form
+          method="post"
+          action="/admin/new_post"
+          enctype="multipart/form-data"
+        >
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            class="w-250 px-4 py-2 mb-5 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            style="font-family: 'Inter'"
+            required
+          />
+          <textarea class="mb-5 w-full" name="content" required>
+            Post Body
+          </textarea>
+          <input
+            type="file"
+            accept="image/jpeg"
+            name="image"
+            class="px-4 py-2 rounded-lg border border-gray-300"
+            required
+          />
+
+          <button
+            class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
+            Create Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
