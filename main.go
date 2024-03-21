@@ -18,10 +18,12 @@ import (
 )
 
 func main() {
-	err := godotenv.Load(".env")
+	if _, err := os.Open(".env"); err == nil {
+		err := godotenv.Load(".env")
 
-	if err != nil {
-		log.Fatal(err)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	dsn := os.Getenv("POSTGRES_URL")
