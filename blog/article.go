@@ -10,7 +10,7 @@ import (
 )
 
 type article struct {
-	Article admin.Post
+	Article htmlArticle
 }
 
 func Article(w http.ResponseWriter, r *http.Request, db *gorm.DB) error {
@@ -29,7 +29,14 @@ func Article(w http.ResponseWriter, r *http.Request, db *gorm.DB) error {
 	}
 
 	tmpl.Execute(w, article{
-		Article: a,
+		Article: htmlArticle{
+			Id:          a.Id,
+			Image:       a.Image,
+			Title:       a.Title,
+			Content:     template.HTML(a.Content),
+			Description: a.Description,
+			Tags:        a.Tags,
+		},
 	})
 
 	return nil

@@ -3,9 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{.Article.Title}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Manrope&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{{.Article.Title}}</title>
+
+    <style>
+      body {
+        background: linear-gradient(
+          to right,
+          #1c2b3a,
+          #2c3e50,
+          #34495e,
+          #2c3e50,
+          #1c2b3a
+        );
+        color: #fff;
+      }
+    </style>
   </head>
-  <body>
-    article
+  <body class="bg-lightblue-950" style="font-family: 'Manrope'">
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const links = document.querySelectorAll("a");
+
+        for (const link of links) {
+          link.className = "text-gray-300";
+        }
+      });
+    </script>
+
+    <nav class="bg-gray-800 px-4 py-3 flex justify-between items-center">
+      <div class="text-white font-bold text-xl">
+        <a class="text-gray-300" href="/">FC Blog</a>
+      </div>
+      <ul class="hidden md:flex space-x-4 list-none">
+        <li>
+          <a href="https://frrt.space" class="text-gray-300 hover:text-white"
+            >Main Site</a
+          >
+        </li>
+      </ul>
+      <div class="md:hidden">
+        <button class="text-gray-300 hover:text-white focus:outline-none">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            <!-- Hamburger icon -->
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="flex">
+      <div class="m-auto mt-5 text-center">
+        <h1 class="font-size-9">{{.Article.Title}}</h1>
+        <h1 class="font-size-4">{{.Article.Description}}</h1>
+
+        <div class="grid gap-2 grid-cols-3">
+          {{range .Article.Tags}}
+          <div
+            class="h5 px2 rd-md text-center bg-gray-300 items-center text-black inline"
+          >
+            {{.}}
+          </div>
+          {{end}}
+        </div>
+
+        <div
+          class="text-center border-rounded-lg border-solid border border-black border-1 my-5"
+        >
+          {{.Article.Content}}
+        </div>
+      </div>
+    </div>
   </body>
 </html>

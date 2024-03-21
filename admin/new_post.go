@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/template"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -16,14 +17,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/google/uuid"
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
 type Post struct {
-	Id      string `json:"id"`
-	Image   string `json:"image"`
-	Title   string `json:"title"`
-	Content string `json:"content"`
+	Id          string         `json:"id"`
+	Image       string         `json:"image"`
+	Title       string         `json:"title"`
+	Content     string         `json:"content"`
+	Description string         `json:"description"`
+	Tags        pq.StringArray `json:"tags" gorm:"type:text[]"`
 }
 
 func NewPost(w http.ResponseWriter, r *http.Request, db *gorm.DB) error {
@@ -45,12 +49,20 @@ func CreateNewPost(w http.ResponseWriter, r *http.Request, db *gorm.DB) error {
 		return err
 	}
 
-	fmt.Println(r.PostForm)
+	tags := strings.Split(r.PostForm.Get("tags"), ",")
+
+	for i, tag := range tags {
+		if tag == "" {
+			tags = append(tags[:i], tags[:i]...)
+		}
+	}
 
 	post := Post{
-		Id:      uuid.NewString(),
-		Title:   r.PostForm.Get("title"),
-		Content: r.PostForm.Get("content"),
+		Id:          uuid.NewString(),
+		Title:       r.PostForm.Get("title"),
+		Content:     r.PostForm.Get("content"),
+		Description: r.PostForm.Get("description"),
+		Tags:        tags,
 	}
 
 	file, fileHeader, err := r.FormFile("image")

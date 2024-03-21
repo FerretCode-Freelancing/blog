@@ -9,7 +9,16 @@ import (
 )
 
 type articleList struct {
-	Articles []admin.Post
+	Articles []htmlArticle
+}
+
+type htmlArticle struct {
+	Id          string        `json:"id"`
+	Image       string        `json:"image"`
+	Title       string        `json:"title"`
+	Content     template.HTML `json:"content"`
+	Description string        `json:"description"`
+	Tags        []string      `json:"tags"`
 }
 
 func Articles(w http.ResponseWriter, r *http.Request, db *gorm.DB) error {
@@ -27,8 +36,21 @@ func Articles(w http.ResponseWriter, r *http.Request, db *gorm.DB) error {
 		return err
 	}
 
+	var htmlArticles []htmlArticle
+
+	for _, article := range articles {
+		htmlArticles = append(htmlArticles, htmlArticle{
+			Id:          article.Id,
+			Image:       article.Image,
+			Title:       article.Title,
+			Content:     template.HTML(article.Content),
+			Description: article.Description,
+			Tags:        article.Tags,
+		})
+	}
+
 	tmpl.Execute(w, articleList{
-		Articles: articles,
+		Articles: htmlArticles,
 	})
 
 	return nil
