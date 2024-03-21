@@ -54,6 +54,9 @@ func main() {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.RealIP)
 
+	fileserver := http.FileServer(http.Dir("./static"))
+	r.Handle("/static/*", http.StripPrefix("/static/", fileserver))
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		err := blog.Articles(w, r, db)
 		handleError(w, err)
